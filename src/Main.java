@@ -5,6 +5,9 @@ public class Main {
     static City federalWay = new City("Federal Way");
     static City auburn = new City("Auburn");
     static City seattle = new City("Seattle");
+    static City lacey = new City("Lacey");
+    static City lakewood = new City("Lakewood");
+    static City olympia = new City("Olympia");
     public static void main(String[] args) {
 
         StoredInfo storedInfo = new StoredInfo();
@@ -12,19 +15,29 @@ public class Main {
         storedInfo.addCity(federalWay);
         storedInfo.addCity(auburn);
         storedInfo.addCity(seattle);
+        storedInfo.addCity(lakewood);
+        storedInfo.addCity(lacey);
+        storedInfo.addCity(olympia);
 
         State washington = new State();
         washington.addCities(tacoma);
         washington.addCities(federalWay);
         washington.addCities(auburn);
         washington.addCities(seattle);
+        washington.addCities(lakewood);
+        washington.addCities(lacey);
+        washington.addCities(olympia);
+
         washington.addRoad(tacoma, federalWay, 10);
         washington.addRoad(tacoma, auburn, 15);
         washington.addRoad(federalWay, auburn, 5);
         washington.addRoad(federalWay, seattle, 15);
         washington.addRoad(auburn, seattle, 20);
+        washington.addRoad(tacoma, lakewood, 5);
+        washington.addRoad(tacoma, lacey, 25);
+        washington.addRoad(lakewood, lacey, 20);
+        washington.addRoad(lacey, olympia, 10);
 
-        Dijkstra.navi(tacoma, washington.adjCities, storedInfo.travelInfo);
         navPrompt(washington, storedInfo);
 
     }
@@ -40,13 +53,19 @@ public class Main {
                     1) Tacoma,
                     2) Federal Way,
                     3) Auburn,
-                    4) Seattle""");
+                    4) Seattle
+                    5) Lakewood
+                    6) Lacey
+                    7) Olympia""");
                 int choice = scan.nextInt();
                 switch (choice) {
                     case 1 -> currentLocation = tacoma;
                     case 2 -> currentLocation = federalWay;
                     case 3 -> currentLocation = auburn;
                     case 4 -> currentLocation = seattle;
+                    case 5 -> currentLocation = lakewood;
+                    case 6 -> currentLocation = lacey;
+                    case 7 -> currentLocation = olympia;
                     default -> System.out.println("Please choose one of the options!");
                 }
                 while(prompt2) {
@@ -56,13 +75,19 @@ public class Main {
                         1) Tacoma,
                         2) Federal Way,
                         3) Auburn,
-                        4) Seattle%n""", currentLocation.name);
+                        4) Seattle
+                        5) Lakewood
+                        6) Lacey
+                        7) Olympia%n""", currentLocation.name);
                     choice = scan.nextInt();
                     switch (choice) {
                         case 1 -> navigate(currentLocation, tacoma, state, travelInfo);
                         case 2 -> navigate(currentLocation, federalWay, state, travelInfo);
                         case 3 -> navigate(currentLocation, auburn, state, travelInfo);
                         case 4 -> navigate(currentLocation, seattle, state, travelInfo);
+                        case 5 -> navigate(currentLocation, lakewood, state, travelInfo);
+                        case 6 -> navigate(currentLocation, lacey, state, travelInfo);
+                        case 7 -> navigate(currentLocation, olympia, state, travelInfo);
                         default -> System.out.println("Please choose one of the options!");
                     }
                     System.out.println("""
