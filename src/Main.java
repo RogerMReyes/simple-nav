@@ -19,17 +19,17 @@ public class Main {
         washington.addCity(auburn);
         washington.addCity(seattle);
 
-        washington.addRoad(tacoma, federalWay, 10);
+        washington.addRoad(tacoma, federalWay, 15);
         washington.addRoad(tacoma, auburn, 20);
-        washington.addRoad(federalWay, auburn, 5);
-        washington.addRoad(federalWay, seattle, 15);
-        washington.addRoad(auburn, seattle, 20);
+        washington.addRoad(federalWay, auburn, 3);
+        washington.addRoad(federalWay, seattle, 20);
+        washington.addRoad(auburn, seattle, 25);
 
         navPrompt(washington, storedInfo);
 
     }
 
-        public static void navPrompt(State state, StoredInfo travelInfo){
+    public static void navPrompt(State state, StoredInfo travelInfo){
             Scanner scan = new Scanner(System.in);
             City currentLocation = null;
             boolean prompt1 = true;
@@ -37,9 +37,9 @@ public class Main {
                 boolean prompt2 = true;
                 System.out.println("""
                     Choose a starting location!
-                    1) Tacoma,
-                    2) Federal Way,
-                    3) Auburn,
+                    1) Tacoma
+                    2) Federal Way
+                    3) Auburn
                     4) Seattle""");
                 int choice = scan.nextInt();
                 switch (choice) {
@@ -49,20 +49,21 @@ public class Main {
                     case 4 -> currentLocation = seattle;
                     default -> System.out.println("Please choose one of the options!");
                 }
+                Dijkstra.navi(currentLocation,state.adjCities, travelInfo.travelInfo);
                 while(prompt2) {
                     System.out.printf("""
                         Current Location : %s
                         Choose a destination!
-                        1) Tacoma,
-                        2) Federal Way,
-                        3) Auburn,
+                        1) Tacoma
+                        2) Federal Way
+                        3) Auburn
                         4) Seattle%n""", currentLocation.name);
                     choice = scan.nextInt();
                     switch (choice) {
-                        case 1 -> navigate(currentLocation, tacoma, state, travelInfo);
-                        case 2 -> navigate(currentLocation, federalWay, state, travelInfo);
-                        case 3 -> navigate(currentLocation, auburn, state, travelInfo);
-                        case 4 -> navigate(currentLocation, seattle, state, travelInfo);
+                        case 1 -> navigate(tacoma, travelInfo);
+                        case 2 -> navigate(federalWay, travelInfo);
+                        case 3 -> navigate(auburn, travelInfo);
+                        case 4 -> navigate(seattle, travelInfo);
                         default -> System.out.println("Please choose one of the options!");
                     }
                     System.out.println("""
@@ -84,8 +85,7 @@ public class Main {
                 }
             }
     }
-    public static void navigate(City currentLocation, City destination, State state, StoredInfo storedInfo){
-        Dijkstra.navi(currentLocation, state.adjCities, storedInfo.travelInfo);
+    public static void navigate(City destination, StoredInfo storedInfo){
         for(City city : storedInfo.travelInfo.get(destination).shortestPathFromSource){
             System.out.print(city.name + " --> ");
         }
