@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 // Responsible for finding the shortest path in Graph Datastructures
 public class Dijkstra {
@@ -18,10 +16,10 @@ public class Dijkstra {
         // Starting location will be the first city to check
         citiesToCheck.add(start);
 
-        // Loop will run until all cities have been checked, Once their are no more cities the loop will break
+        // Loop will run until all cities have been checked, Once there are no more cities the loop will break
         while(!citiesToCheck.isEmpty()){
             // Grabs reference of the first city in the citiesToCheck array
-            City currentCity = citiesToCheck.get(0);
+            City currentCity = getCityWithMinTravelTime(citiesToCheck, travelInfo);
             // Once reference is grabbed, the City is taken out of the citiesToCheck array
             citiesToCheck.remove(currentCity);
 
@@ -36,6 +34,21 @@ public class Dijkstra {
             }
             completedCities.add(currentCity);
         }
+    }
+
+    // Function used to grab the City with the shortest Travel Time
+    private static City getCityWithMinTravelTime(List<City> citiesToCheck, HashMap<City, TravelDetails> travelInfo) {
+        City shortestTravelTimeNode = null;
+        int shortestTravelTime = Integer.MAX_VALUE;
+        for (City city: citiesToCheck) {
+            int currentTravelTime = travelInfo.get(city).totalTravelTime;
+            if (currentTravelTime < shortestTravelTime) {
+                shortestTravelTime = currentTravelTime;
+                shortestTravelTimeNode = city;
+            }
+        }
+        return shortestTravelTimeNode;
+
     }
 
     // This function is responsible for checking if the destination travel time from the current path is shorter
