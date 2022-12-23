@@ -14,10 +14,10 @@ public class Main {
         storedInfo.addCity(seattle);
 
         State washington = new State();
-        washington.addCities(tacoma);
-        washington.addCities(federalWay);
-        washington.addCities(auburn);
-        washington.addCities(seattle);
+        washington.addCity(tacoma);
+        washington.addCity(federalWay);
+        washington.addCity(auburn);
+        washington.addCity(seattle);
 
         washington.addRoad(tacoma, federalWay, 10);
         washington.addRoad(tacoma, auburn, 20);

@@ -14,7 +14,7 @@ public class State {
     }
 
     //Adds a city as the KEY to adjCities and creates an empty array as the VALUE
-    public void addCities(City city){
+    public void addCity(City city){
         adjCities.put(city, new ArrayList<>());
     }
 
